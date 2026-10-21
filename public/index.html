@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEAM TARSIUS BLAST — Luxury Edition</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar Left -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon"> tarsius </div>
+        <div>
+          <strong class="brand-title">TEAM TARSIUS</strong>
+          <small class="brand-sub">BLAST ENGINE v4.0</small>
+        </div>
+      </div>
+
+      <div class="nav-section-title">MAIN WORKSPACE</div>
+      <nav class="nav-list">
+        <a class="nav-item active" href="#device-panel"><span class="nav-ic">⚡</span> Device Control</a>
+        <a class="nav-item" href="#composer-panel"><span class="nav-ic">🚀</span> Blast Composer</a>
+        <a class="nav-item" href="#log-panel"><span class="nav-ic">📡</span> Live Terminal</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="luxury-badge">
+          <span class="gold-dot"></span>
+          <span>ENTERPRISE PRO</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <span class="system-tag">SYSTEM ONLINE</span>
+          <span class="breadcrumb-text">Dashboard / <strong>Team Tarsius Control Panel</strong></span>
+        </div>
+        <div class="topbar-right">
+          <div id="statusBadge" class="status-pill status-wait"><span class="pulse-dot"></span> Memeriksa Status...</div>
+        </div>
+      </header>
+
+      <section class="hero-banner">
+        <div>
+          <span class="eyebrow">PREMIUM AUTOMATION TOOLS</span>
+          <h1>TEAM TARSIUS BLAST</h1>
+          <p>Solusi Pengiriman Pesan WhatsApp Massal Cepat, Aman & Anti-Banned.</p>
+        </div>
+      </section>
+
+      <!-- Panel 1: Device Auth -->
+      <section class="luxury-card" id="device-panel">
+        <div class="card-header">
+          <div>
+            <p class="card-kicker">AUTENTIKASI SOKET</p>
+            <h2>Koneksi Perangkat WhatsApp</h2>
+          </div>
+          <button id="refreshSessionBtn" class="btn btn-ghost">🔄 Reset & QR Baru</button>
+        </div>
+
+        <div class="auth-grid">
+          <div class="qr-container">
+            <div id="qrcode" class="qr-frame">
+              <div class="qr-placeholder"><span>▦</span><small>MEMUAT QR...</small></div>
+            </div>
+            <p class="hint-center">Pindai QR dari menu Perangkat Tertaut di WA</p>
+          </div>
+
+          <div class="pairing-container">
+            <label class="field-label">Atau Gunakan Kode Pairing Instan:</label>
+            <div class="input-group">
+              <input id="pairPhone" type="tel" placeholder="628123456789">
+              <button id="pairButton" class="btn btn-gold">Minta Kode</button>
+            </div>
+            <div id="pairingCodeDisplay" class="pairing-result hidden">
+              <small>KODE PAIRING ANDA:</small>
+              <strong id="pairingCodeText">— — — —</strong>
+            </div>
+            <p class="hint">Masukkan nomor diawali kode negara 62 (contoh: 6281234567890)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel 2: Campaign Composer -->
+      <section class="luxury-card" id="composer-panel">
+        <div class="card-header">
+          <div>
+            <p class="card-kicker">WORKFLOW CAMPAIGN</p>
+            <h2>Pusat Kontrol Broadcast</h2>
+          </div>
+        </div>
+
+        <!-- File Upload -->
+        <div class="form-group">
+          <label class="field-label">📁 Upload Database CSV/TXT (Format: Nomor,Nama):</label>
+          <input type="file" id="csvFileInput" accept=".csv, .txt" class="file-input">
+          <p class="hint">Contoh isi CSV: <code>62812345678,Budi</code> (Satu kontak per baris)</p>
+        </div>
+
+        <div class="form-group">
+          <div class="label-flex">
+            <label class="field-label">Daftar Kontak Target:</label>
+            <span id="targetCountMeta" class="badge-count">0 Kontak</span>
+          </div>
+          <textarea id="targetNumbers" rows="5" placeholder="6281234567890,Budi&#10;6289876543210,Siti"></textarea>
+        </div>
+
+        <!-- Delay Selector -->
+        <div class="form-group">
+          <label class="field-label">⏱️ Delay Antar Pesan (Anti-Banned):</label>
+          <select id="delaySelect" class="select-input">
+            <option value="3">3 Detik (Mode Cepat)</option>
+            <option value="5" selected>5 Detik (Rekomendasi Aman)</option>
+            <option value="10">10 Detik (Mode Santai)</option>
+            <option value="15">15 Detik (Super Aman)</option>
+          </select>
+        </div>
+
+        <!-- Message Editor -->
+        <div class="form-group">
+          <label class="field-label">Isi Pesan (Gunakan <code>{nama}</code> untuk panggil nama & Spintax <code>{Halo|Hai}</code>):</label>
+          <textarea id="messageContent" rows="4" placeholder="{Halo|Hai} Kak {nama}, ada promo menarik hari ini!"></textarea>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container hidden" id="progressWrap">
+          <div class="progress-info">
+            <span id="progressText">Mengirim...</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar-bg"><div id="progressBar" class="progress-bar-fill"></div></div>
+        </div>
+
+        <div class="btn-group">
+          <button id="startButton" class="btn btn-primary-gold">🚀 Mulai Blast Massal</button>
+          <button id="clearButton" class="btn btn-ghost">Bersihkan Form</button>
+        </div>
+      </section>
+
+      <!-- Panel 3: Terminal Activity Logs -->
+      <section class="luxury-card" id="log-panel">
+        <div class="card-header">
+          <div>
+            <p class="card-kicker">MONITORING</p>
+            <h2>Live Activity Logs</h2>
+          </div>
+          <button id="clearLogs" class="btn btn-ghost btn-sm">Bersihkan Terminal</button>
+        </div>
+        <div id="blastLogs" class="terminal-box">
+          <div class="term-line"><time>00:00:00</time><span class="badge-info">INFO</span> TEAM TARSIUS BLAST Siap Dijalankan...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
